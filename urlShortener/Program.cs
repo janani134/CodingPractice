@@ -26,8 +26,9 @@ builder.Services.AddSingleton(sp =>
 
 builder.Services.AddSingleton<IShortUrlRepository, ShortUrlRepository>();
 builder.Services.AddSingleton<IShortUrlService, ShortUrlService>();
-var app = builder.Build();
 
+var app = builder.Build();
+app.UseMiddleware<RateLimiterMiddleware>();
 if(app.Environment.IsDevelopment())
 {
     app.UseSwagger();
